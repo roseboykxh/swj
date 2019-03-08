@@ -27,7 +27,7 @@ class City extends Backend
      */
     public function index(){
         //快捷查询数组数组联合查询需要带表名
-        $searchArr = array('city_name','city_code');
+        $searchArr = array('city_code');
         //demo联合查询时检索需要设置表名数组
         /*$searchFormArr = array(
             'seach'=>array(
@@ -43,8 +43,10 @@ class City extends Backend
             //list($where, $sort, $order, $offset, $limit) = $this->sql_buildparams($searchArr,true,$searchFormArr);
             list($where, $sort, $order, $offset, $limit) = $this->sql_buildparams($searchArr);
             //dump($where);exit;
+            //dump($this->sql->getCityCount($where));exit;
+
             $total = Db::getOne($this->sql->getCityCount($where));
-            $list = Db::query($this->sql->getCityList($sort,$order,$offset,$limit));
+            $list = Db::query($this->sql->getCityList($where,$sort,$order,$offset,$limit));
             $result = array("total" => $total['total'], "rows" => $list);
             return json($result);
        }
@@ -56,13 +58,13 @@ class City extends Backend
      */
     public function add(){
         if ($this->request->isPost()){
-            $params = $this->request->post("row/a");
-            $bool = Db::execute($this->sql->insertCity($params));
-            if($bool){
-                $this->success();
-            }else{
-                $this->error();
-            }
+                $params = $this->request->post("row/a");
+                $bool = Db::execute($this->sql->insertCity($params));
+                if($bool){
+                    $this->success();
+                }else{
+                    $this->error();
+                }
         }
         $city_code = config('sysvar.city_code');
         //print_r($city_code);

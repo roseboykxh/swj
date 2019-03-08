@@ -4,13 +4,13 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
         index: function () {
             // 初始化表格参数配置
             Table.api.init({
-                    extend: {
-                        index_url: 'basicset/city/index',
-                        add_url: 'basicset/city/add',
-                        edit_url: 'basicset/city/edit',
-                        del_url: 'basicset/city/del',
-                        multi_url: 'basicset/city/multi',
-                    }
+                extend: {
+                    index_url: 'modular/seasonmodular/index',
+                    add_url: 'modular/seasonmodular/add',
+                    edit_url: 'modular/seasonmodular/edit',
+                    del_url: 'modular/seasonmodular/del',
+                    multi_url: 'modular/seasonmodular/multi'
+                }
             });
 
             var table = $("#table");
@@ -30,11 +30,17 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                     [
                         {field: 'state', checkbox: true, },
                         {field: 'id', title: 'ID',sortable: true},
-                        {field: 'city_name',  title: __('cityName'),operate: 'LIKE'},
-                        {field: 'city_code', title: __('cityCode')},
+                        {field: 'rf_title',  title: __('rfTitle'),operate: 'LIKE'},
+                        {field: 'code', title: __('Code'),operate: 'LIKE'},
+                        {field: 'unit_id', title: __('unitId'),operate: false},
+                        {field: 'css_class', title: __('cssClass'),operate: false},
+                        {field: 'form_type', title: __('formType'),operate: false},
+                        {field: 'number', title: __('numBer'),operate: false},
+                        {field: 'rf_class', title: __('rfClass'),operate: false},
+                        {field: 'rf_year', title: __('rfYear'),operate: false},
                         {field: 'operate', title: __('Operate'), table: table, events: Table.api.events.operate, formatter: function (value, row, index) {
-                                return Table.api.formatter.operate.call(this, value, row, index);
-                            }}
+                            return Table.api.formatter.operate.call(this, value, row, index);
+                        }}
                     ]
                 ]
             });

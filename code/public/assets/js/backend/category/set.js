@@ -4,13 +4,13 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
         index: function () {
             // 初始化表格参数配置
             Table.api.init({
-                    extend: {
-                        index_url: 'basicset/city/index',
-                        add_url: 'basicset/city/add',
-                        edit_url: 'basicset/city/edit',
-                        del_url: 'basicset/city/del',
-                        multi_url: 'basicset/city/multi',
-                    }
+                extend: {
+                    index_url: 'category/set/index',
+                    add_url: 'category/set/add',
+                    edit_url: 'category/set/edit',
+                    del_url: 'category/set/del',
+                    multi_url: 'category/set/multi'
+                }
             });
 
             var table = $("#table");
@@ -28,13 +28,14 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                 exportTypes: [ 'excel'],
                 columns: [
                     [
-                        {field: 'state', checkbox: true, },
+                        {field: 'states', checkbox: true},
                         {field: 'id', title: 'ID',sortable: true},
-                        {field: 'city_name',  title: __('cityName'),operate: 'LIKE'},
-                        {field: 'city_code', title: __('cityCode')},
+                        {field: 'unit_name',  title: __('unitName'),operate: 'LIKE'},
+                        {field: 'add_time', title: __('addTime'),operate: false},
+                        {field: 'state', title: __('State'),operate: false},
                         {field: 'operate', title: __('Operate'), table: table, events: Table.api.events.operate, formatter: function (value, row, index) {
-                                return Table.api.formatter.operate.call(this, value, row, index);
-                            }}
+                            return Table.api.formatter.operate.call(this, value, row, index);
+                        }}
                     ]
                 ]
             });

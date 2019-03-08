@@ -4,13 +4,13 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
         index: function () {
             // 初始化表格参数配置
             Table.api.init({
-                    extend: {
-                        index_url: 'basicset/city/index',
-                        add_url: 'basicset/city/add',
-                        edit_url: 'basicset/city/edit',
-                        del_url: 'basicset/city/del',
-                        multi_url: 'basicset/city/multi',
-                    }
+                extend: {
+                    index_url: 'declared/declareds/index',
+                    add_url: 'declared/declareds/add',
+                    edit_url: 'declared/declareds/edit',
+                    del_url: 'declared/declareds/del',
+                    multi_url: 'declared/declareds/multi'
+                }
             });
 
             var table = $("#table");
@@ -28,13 +28,18 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                 exportTypes: [ 'excel'],
                 columns: [
                     [
-                        {field: 'state', checkbox: true, },
+                        {field: 'state', checkbox: true},
                         {field: 'id', title: 'ID',sortable: true},
-                        {field: 'city_name',  title: __('cityName'),operate: 'LIKE'},
-                        {field: 'city_code', title: __('cityCode')},
+                        {field: 'rf_title',  title: __('rfTitle'),operate: 'LIKE'},
+                        {field: 'item_val', title: __('itemVal'),operate: false},
+                        {field: 'chk_item_val', title: __('chkItemVal'),operate: false},
+                        {field: 'username', title: __('opUserId'),operate: false},
+                        {field: 'username1', title: __('chkUserId'),operate: false},
+                        {field: 'set_time', title: __('setTime'),operate: false},
+                        {field: 'add_time', title: __('addTime'),operate: false},
                         {field: 'operate', title: __('Operate'), table: table, events: Table.api.events.operate, formatter: function (value, row, index) {
-                                return Table.api.formatter.operate.call(this, value, row, index);
-                            }}
+                            return Table.api.formatter.operate.call(this, value, row, index);
+                        }}
                     ]
                 ]
             });

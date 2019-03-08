@@ -469,7 +469,7 @@ class Backend extends Controller
                     break;
             }
         }
-        echo $where;exit;
+        //echo $where;exit;
 
 
         return [$where, $sort, $order, $offset, $limit];

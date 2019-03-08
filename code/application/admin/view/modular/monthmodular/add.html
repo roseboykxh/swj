@@ -1,0 +1,71 @@
+<form id="add-form" class="form-horizontal form-ajax" role="form" data-toggle="validator" method="POST" action="">
+
+    <div class="form-group">
+        <label for="rf_title" class="control-label col-xs-12 col-sm-2">{:__('rfTitle')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="rf_title" name="row[rf_title]" value="" data-rule="required;rf_title" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="code" class="control-label col-xs-12 col-sm-2">{:__('Code')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="code" name="row[code]" value="" data-rule="required;code" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('unitId')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <select name="row[unit_id]" class="selectpicker form-control">
+                {volist name="unit_id" id="data"}
+                <option value="{$data}">{$data}</option>
+                {/volist}
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="css_class" class="control-label col-xs-12 col-sm-2">{:__('cssClass')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="css_class" name="row[css_class]" value="" data-rule="required;css_class" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="form_type" class="control-label col-xs-12 col-sm-2">{:__('formType')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="form_type" name="row[form_type]" value="" data-rule="required;form_type" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('numBer')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <select name="row[number]" class="selectpicker form-control">
+                {volist name="number" id="data"}
+                <option value="{$data}">{$data}</option>
+                {/volist}
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('rfClass')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <select name="row[rf_class]" class="selectpicker form-control">
+                {volist name="rf_class" id="data"}
+                <option value="{$data}">{$data}</option>
+                {/volist}
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="rf_year" class="control-label col-xs-12 col-sm-2">{:__('rfYear')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="rf_year" name="row[rf_year]" value="" data-rule="required;rf_year" />
+        </div>
+    </div>
+
+    <div class="form-group hidden layer-footer">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-success btn-embossed disabled">{:__('OK')}</button>
+            <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+        </div>
+    </div>
+</form>

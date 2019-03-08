@@ -8,13 +8,13 @@ namespace app\admin\sql;
  */
 class citySql
 {
-    public function getCityCount(){
-        $sql = sprintf('SELECT COUNT(*) AS total FROM zc_city ');
+    public function getCityCount($where){
+        $sql = sprintf('SELECT COUNT(*) AS total FROM zc_city %s ',$where);
         return $sql;
     }
 
-    public function getCityList($sort,$order,$offset,$limit){
-        $sql = sprintf('SELECT * FROM zc_city ORDER BY %s %s  LIMIT %d,%d',$sort,$order,$offset,$limit);
+    public function getCityList($where,$sort,$order,$offset,$limit){
+        $sql = sprintf('SELECT * FROM zc_city %s ORDER BY %s %s  LIMIT %d,%d',$where,$sort,$order,$offset,$limit);
         return $sql;
     }
 
