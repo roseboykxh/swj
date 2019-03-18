@@ -5,6 +5,7 @@ namespace app\admin\controller\declared;
 use app\common\controller\Backend;
 use think\Db;
 use app\admin\sql\declaredsSql;
+use think\Session;
 /**
  * Created by PhpStorm.
  * User: Administrator
@@ -43,9 +44,14 @@ class Declareds extends Backend
      * 添加
      */
     public function add(){
+        $admin = Session::get('admin');
         if ($this->request->isPost()){
             $params = $this->request->post("row/a");
-            $bool = Db::execute($this->sql->insertDeclareds($params));
+            $params['admin_id'] = $admin['id'];
+            $bool = $this->sql->insertDeclareds($params);
+            for($i=0;$i<count($bool);$i++){
+                Db::execute($bool[$i]);
+            }
             if($bool){
                 $this->success();
             }else{
@@ -54,8 +60,7 @@ class Declareds extends Backend
         }
         $rows = Db::query($this->sql->getDeclaredsRows());
         $this->assign('rows',$rows);
-        $rowss = Db::query($this->sql->getDeclaredsRowss());
-        $this->assign('rowss',$rowss);
+        $this->assign('admin', $admin);
         return $this->view->fetch();
     }
     /**

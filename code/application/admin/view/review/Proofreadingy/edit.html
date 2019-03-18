@@ -1,0 +1,33 @@
+<form id="add-form" class="form-horizontal form-ajax" role="form" data-toggle="validator" method="POST" action="">
+    <div class="form-group" style="background-color: #ffffff;height: 50px;line-height: 50px;font-size: 24px;">
+        <label class="control-label col-xs-12 col-sm-2"><strong>标题  </strong></label>
+        <label class="control-label col-xs-12 col-sm-2"><strong>代码  </strong></label>
+        <label class="control-label col-xs-12 col-sm-2"><strong>录入值</strong></label>
+        <label class="control-label col-xs-12 col-sm-2"><strong>校验值</strong></label>
+        <label class="control-label col-xs-12 col-sm-2"><strong>单位  </strong></label>
+    </div>
+    {foreach $row as $k => $v}
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{$v.rf_title}</label>
+        <label class="control-label col-xs-12 col-sm-2" >{$v.code}</label>
+        <label class="control-label col-xs-12 col-sm-2">{$v.item_val}</label>
+        <input type="text" class="control-label col-xs-12 col-sm-2 " style="width: 100px;margin-left: 30px;" name="row[{$v.id}]" value="{$v.chk_item_val}" data-rule="required;{$v.chk_item_val}"/>
+        <label class="control-label col-xs-12 col-sm-2" style="margin-left: -10px;">{$v.unit_name}</label>
+    </div>
+    {/foreach}
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('opUserId')}:</label>
+        <label class="control-label col-xs-12 col-sm-2">{$v.nickname}</label>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">校验人员:</label>
+        <label class="control-label col-xs-12 col-sm-2">{$admin.nickname}</label>
+    </div>
+    <div class="form-group layer-footer">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-success btn-embossed disabled">{:__('OK')}</button>
+            <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+        </div>
+    </div>
+</form>

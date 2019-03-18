@@ -5,6 +5,8 @@ namespace app\admin\controller\declared;
 use app\common\controller\Backend;
 use think\Db;
 use app\admin\sql\declaredmSql;
+use think\Session;
+
 /**
  * Created by PhpStorm.
  * User: Administrator
@@ -14,7 +16,7 @@ use app\admin\sql\declaredmSql;
 class Declaredm extends Backend
 {
     protected $sql= null;
-    protected $searchFields = 'id';
+    protected $searchFields = 'rf_title';
     public function _initialize()
     {
         parent::_initialize();
@@ -26,7 +28,7 @@ class Declaredm extends Backend
      */
     public function index(){
         //快捷查询数组数组联合查询需要带表名
-        $searchArr = array('id');
+        $searchArr = array('rf_title','item_val');
         if ($this->request->isAjax()){
 
             list($where, $sort, $order, $offset, $limit) = $this->sql_buildparams($searchArr);
@@ -43,9 +45,14 @@ class Declaredm extends Backend
      * 添加
      */
     public function add(){
+        $admin = Session::get('admin');
         if ($this->request->isPost()){
             $params = $this->request->post("row/a");
-            $bool = Db::execute($this->sql->insertDeclaredm($params));
+            $params['admin_id'] = $admin['id'];
+            $bool = $this->sql->insertDeclaredm($params);
+            for($i=0;$i<count($bool);$i++){
+                Db::execute($bool[$i]);
+            }
             if($bool){
                 $this->success();
             }else{
@@ -54,14 +61,14 @@ class Declaredm extends Backend
         }
         $rows = Db::query($this->sql->getDeclaredmRows());
         $this->assign('rows',$rows);
-        $rowss = Db::query($this->sql->getDeclaredmRowss());
-        $this->assign('rowss',$rowss);
+        $this->assign('admin', $admin);
         return $this->view->fetch();
     }
     /**
      * 编辑
      */
     public function edit($ids = NULL){
+        $admin = Session::get('admin');
         if ($this->request->isPost()){
             $params = $this->request->post("row/a");
             $bool = Db::execute($this->sql->updateDeclaredm($params));
@@ -73,10 +80,7 @@ class Declaredm extends Backend
         }
         $row = Db::getOne($this->sql->getDeclaredmRow($ids));
         $this->view->assign("row", $row);
-        $rows = Db::query($this->sql->getDeclaredmRows());
-        $this->assign('rows',$rows);
-        $rowss = Db::query($this->sql->getDeclaredmRowss());
-        $this->assign('rowss',$rowss);
+        $this->assign('admin', $admin);
         return $this->view->fetch();
     }
 

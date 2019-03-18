@@ -6,6 +6,6 @@ return [
     'chkItemVal' => '校验录入',
     'opUserId' => '录入人员',
     'chkUserId' => '校验人员',
-    'setTime' => '指定年报时间',
+    'setTime' => '指定月报时间',
     'addTime' => '添加时间',
 ];

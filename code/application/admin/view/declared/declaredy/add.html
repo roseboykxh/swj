@@ -1,35 +1,22 @@
 <form id="add-form" class="form-horizontal form-ajax" role="form" data-toggle="validator" method="POST" action="">
-
+    {foreach $rows as $k => $v}
     <div class="form-group">
-        <label class="control-label col-xs-12 col-sm-2">{:__('rfTitle')}:</label>
+        <label for="rf_title" class="control-label col-xs-12 col-sm-2">{$v.rf_title}</label>
+        <label for="rf_title" class="control-label col-xs-12 col-sm-2">{$v.code}</label>
         <div class="col-xs-12 col-sm-8">
-            <select name="row[rf_id]" class="selectpicker form-control">
-                {foreach $rows as $k => $v}
-                <option value="{$v.id}">{$v.rf_title}</option>
-                {/foreach}
-            </select>
+            <input type="text" class="form-control" style="width: 150px;" id="rf_title" name="row[{$v.id}]" value=""
+                   data-rule="required;rf_title"/>
         </div>
-    </div>
+        <label  class="control-label col-xs-12 col-sm-2" style="margin-left: -400px;">{$v.unit_name}</label>
 
-    <div class="form-group">
-        <label for="item_val" class="control-label col-xs-12 col-sm-2">{:__('itemVal')}:</label>
-        <div class="col-xs-12 col-sm-8">
-            <input type="text" class="form-control" id="item_val" name="row[item_val]" value=""
-                   data-rule="required;item_val"/>
-        </div>
     </div>
+    {/foreach}
     <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2">{:__('opUserId')}:</label>
-        <div class="col-xs-12 col-sm-8">
-            <select name="row[op_user_id]" class="selectpicker form-control">
-                {foreach $rowss as $k => $v}
-                <option value="{$v.id}">{$v.username}</option>
-                {/foreach}
-            </select>
-        </div>
+        <label class="control-label col-xs-12 col-sm-2" >{$admin.nickname}</label>
     </div>
     <div class="form-group">
-        <label for="set_time" class="control-label col-xs-12 col-sm-2">{:__('setTime')}:</label>
+        <label for="set_time" class="control-label col-xs-12 col-sm-2" style="width: 150px;">{:__('setTime')}:</label>
         <div class="col-xs-12 col-sm-4">
             <input type="text" class="form-control datetimepicker" id="set_time" name="row[set_time]" value=""
                    data-rule="{:__('setTime')}:required;match(gte, row[begintime], datetime)" size="6"/>
